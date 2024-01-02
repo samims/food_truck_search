@@ -30,7 +30,7 @@ INSTALLED_APPS = [
 
     # other includes
     'django.contrib.gis',
-
+    'rest_framework',
 
     # local apps
     "core",
@@ -111,6 +111,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 5
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -164,5 +169,6 @@ dictConfig({
             'level': 'DEBUG',
             'handlers': ['console', 'file']
         }
+
     }
 })
