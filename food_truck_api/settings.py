@@ -1,3 +1,4 @@
+import os
 from logging.config import dictConfig
 from pathlib import Path
 
@@ -27,8 +28,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # local
+    # other includes
+    'django.contrib.gis',
+
+
+    # local apps
     "core",
+    "food_truck",
 ]
 
 MIDDLEWARE = [
@@ -65,12 +71,25 @@ WSGI_APPLICATION = "food_truck_api.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': os.environ.get("POSTGRESQL_DATABASE"),
+        'USER': os.environ.get("POSTGRESQL_USERNAME"),
+        "PASSWORD": os.environ.get("POSTGRESQL_PASSWORD"),
+        "HOST": os.environ.get("POSTGRESQL_HOST"),
+        "PORT": os.environ.get("POSTGRESQL_PORT")
     }
 }
+
 
 
 # Password validation
