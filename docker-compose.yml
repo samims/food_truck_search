@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  food_truck_web:
+    restart: always
+    container_name: food_truck_web
+    env_file:
+      - .env
+    build:
+      context: .
+    ports:
+      - "3000:8000"
+    networks:
+      - food_truck
+    volumes:
+      - .:/code
+    command: >
+      sh -c "
+        python3 manage.py makemigrations --noinput &&
+        python3 manage.py migrate --noinput &&
+        python3 manage.py collectstatic --noinput &&
+        python3 manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - food_truck_db
+
+
+  food_truck_db:
+    image: bitnami/postgresql:12
+    container_name: food_truck_db
+    ports:
+      - "5432:5432"
+    env_file: .env
+    networks:
+      - food_truck
+    volumes:
+      - food_truck_data:/bitnami/postgresql
+
+volumes:
+  food_truck_data:
+networks:
+  food_truck:
+

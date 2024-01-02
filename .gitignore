@@ -1,0 +1,9 @@
+*.pyc
+__pycache__/
+.idea/
+.vscode/
+*.swp
+*.sqlite3
+.env
+food_truck_data/
+*.log
