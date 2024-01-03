@@ -1,7 +1,4 @@
 # Food Truck Search
-Brief description or introduction to the project.
-
-## Introduction
 API for searching food truck on San Francisco within 5 km of range
 
 ## Features
