@@ -52,7 +52,7 @@ class FoodTruck(BaseModel):
     # will be used for search
     latitude = gis_models.DecimalField(max_digits=40, decimal_places=20, db_index=True)
     longitude = gis_models.DecimalField(max_digits=40, decimal_places=20)
-    location = gis_models.PointField(db_index=True)
+    location = gis_models.PointField(db_index=True, null=True)
 
     schedule = models.URLField()
     days_hours = models.CharField(max_length=60, null=True)
@@ -69,12 +69,10 @@ class FoodTruck(BaseModel):
     zip_code = models.CharField(max_length=10, null=True)
     neighbourhoods = models.CharField(max_length=255, null=True)
 
-    # def save(self, *args, **kwargs):
-    #     if self.latitude is not None and self.longitude is not None:
-    #         print("--------")
-    #         print(self.latitude, self.longitude)
-    #         self.location = Point(self.longitude, self.latitude)
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if self.latitude is not None and self.longitude is not None and self.location is None:
+            self.location = Point(self.longitude, self.latitude)
+        super().save(*args, **kwargs)
 
     def __str__(self) -> str:
         return self.applicant

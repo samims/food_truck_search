@@ -172,3 +172,20 @@ dictConfig({
 
     }
 })
+
+
+# STATIC VALUES
+
+DEFAULT_RADIUS = 1
+
+MIN_LAT = 37.6
+MAX_LAT = 37.9
+MIN_LONG = -123.0
+MAX_LONG = -122.3
+
+LAT_LONG_BOUNDARY = {
+    "min_lat": MIN_LAT,
+    "max_lat": MAX_LAT,
+    "min_long": MIN_LONG,
+    "max_long": MAX_LONG,
+}
