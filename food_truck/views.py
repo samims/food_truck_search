@@ -1,3 +1,4 @@
+from django.conf import settings
 from rest_framework.generics import ListAPIView
 
 from food_truck.selector import FoodTruckRepository
@@ -24,5 +25,5 @@ class FoodTruckListAPIView(ListAPIView):
         validated_data = query_serializer.validated_data
         lat = validated_data["lat"]
         long = validated_data["long"]
-        radius = validated_data.get("radius", 1)
+        radius = validated_data.get("radius", settings.DEFAULT_RADIUS)
         return lat, long, radius
